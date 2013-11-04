@@ -108,7 +108,7 @@ public class LoginActivity extends Activity {
         // If the calling package is null, this generally means that the callee was started
         // with a launchMode of singleInstance. Unfortunately, Android does not allow a result
         // to be set when the callee is a singleInstance, so we log an error and return.
-        if (callingPackage == null) {
+        if (callingPackage == null || request == null) {
             Log.e(TAG, NULL_CALLING_PKG_ERROR_MSG);
             finish();
             return;

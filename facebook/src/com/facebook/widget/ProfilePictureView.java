@@ -39,7 +39,8 @@ import java.net.URISyntaxException;
  * to user specified dimensions.
  */
 public class ProfilePictureView extends FrameLayout {
-
+	public static final int DEFAULT_PROFILE_PIC_WIDTH = 75;
+	public static final int DEFAULT_PROFILE_PIC_HEIGHT = 75;
     /**
      * Callback interface that will be called when a network or other error is encountered
      * while retrieving profile pictures.
@@ -410,6 +411,10 @@ public class ProfilePictureView extends FrameLayout {
 	} else {
           // Update profile image dimensions.
           updateImageQueryParameters();
+          if(queryWidth==0){
+        	  queryWidth = DEFAULT_PROFILE_PIC_WIDTH;
+        	  queryHeight = DEFAULT_PROFILE_PIC_HEIGHT;
+          }
           // Resize inputBitmap to new dimensions of queryWidth and queryHeight.
           Bitmap scaledBitmap = Bitmap.createScaledBitmap(customizedDefaultProfilePicture, queryWidth, queryHeight, false);
           setImageBitmap(scaledBitmap);

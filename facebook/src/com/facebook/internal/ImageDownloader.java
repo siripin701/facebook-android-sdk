@@ -245,16 +245,18 @@ public class ImageDownloader {
 
                 default:
                     stream = connection.getErrorStream();
-                    InputStreamReader reader = new InputStreamReader(stream);
-                    char[] buffer = new char[128];
-                    int bufferLength;
-                    StringBuilder errorMessageBuilder = new StringBuilder();
-                    while ((bufferLength = reader.read(buffer, 0, buffer.length)) > 0) {
-                        errorMessageBuilder.append(buffer, 0, bufferLength);
+                    if(stream != null){
+	                    InputStreamReader reader = new InputStreamReader(stream);
+	                    char[] buffer = new char[128];
+	                    int bufferLength;
+	                    StringBuilder errorMessageBuilder = new StringBuilder();
+	                    while ((bufferLength = reader.read(buffer, 0, buffer.length)) > 0) {
+	                        errorMessageBuilder.append(buffer, 0, bufferLength);
+	                    }
+	                    Utility.closeQuietly(reader);
+	
+	                    error = new FacebookException(errorMessageBuilder.toString());
                     }
-                    Utility.closeQuietly(reader);
-
-                    error = new FacebookException(errorMessageBuilder.toString());
                     break;
             }
         } catch (IOException e) {
